@@ -1,0 +1,63 @@
+buildscript {
+    ext {
+        springBootVersion = "1.2.3.RELEASE"
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
+        classpath("io.spring.gradle:dependency-management-plugin:0.4.1.RELEASE")
+    }
+}
+
+apply plugin: "java"
+apply plugin: "idea" 
+apply plugin: "spring-boot"
+apply plugin: "io.spring.dependency-management"
+apply plugin: "war"
+
+
+compileJava {
+    sourceCompatibility = "1.7"
+    targetCompatibility = "1.7"
+}
+
+springBoot {
+    mainClass = "pl.rozart.familytree.FamilyTreeApplication"
+}
+
+war {
+    baseName = "familytree"
+    version = "0.0.1-SNAPSHOT"
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://m2.neo4j.org" }
+    maven { url "https://repo.spring.io/libs-release" }
+}
+
+configurations {
+    providedRuntime
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework:spring-context")
+    compile("org.springframework:spring-tx")
+    compile("org.springframework.data:spring-data-neo4j")
+    compile("org.springframework.data:spring-data-neo4j-rest:3.3.0.RELEASE")
+    compile("org.hibernate:hibernate-validator")
+    compile("javax.el:javax.el-api:2.2.4")
+    compile("javax.servlet.jsp.jstl:jstl:1.2")
+    compile("taglibs:standard:1.1.2")
+    compile("org.springframework.boot:spring-boot-starter-tomcat")
+    providedRuntime("org.apache.tomcat.embed:tomcat-embed-jasper:8.0.8")
+    testCompile("org.springframework.boot:spring-boot-starter-test") 
+}
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = "2.3"
+}
