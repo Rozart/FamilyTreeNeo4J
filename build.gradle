@@ -48,12 +48,11 @@ dependencies {
     compile("org.springframework:spring-tx")
     compile("org.springframework.data:spring-data-neo4j")
     compile("org.springframework.data:spring-data-neo4j-rest:3.3.0.RELEASE")
-    compile("org.hibernate:hibernate-validator")
-    compile("javax.el:javax.el-api:2.2.4")
-    compile("javax.servlet.jsp.jstl:jstl:1.2")
-    compile("taglibs:standard:1.1.2")
-    compile("org.springframework.boot:spring-boot-starter-tomcat")
-    providedRuntime("org.apache.tomcat.embed:tomcat-embed-jasper:8.0.8")
+    compile("org.neo4j:neo4j-primitive-collections:2.2.1")
+    compile('org.apache.commons:commons-collections4:4.0')
+    compile("org.thymeleaf:thymeleaf-spring4:2.1.2.RELEASE")
+    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+    providedRuntime("org.apache.tomcat.embed:tomcat-embed-jasper")
     testCompile("org.springframework.boot:spring-boot-starter-test") 
 }
 

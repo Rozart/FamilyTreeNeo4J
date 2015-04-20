@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8" />
+    <title>HELLO</title>
+</head>
+<body>
+
+<h1>Current people</h1>
+
+<table>
+    <tr th:each="person : ${persons}">
+        <td th:text="${person.name}">Default name</td>
+        <td th:text="${person.sex}">N/A</td>
+        <td th:text="${person.birthDate}">00-00-0000</td>
+        <td th:text="${person.deathDate}">00-00-0000</td>
+    </tr>
+</table>
+
+<form action="#" th:action="@{/addPerson}" th:object="${person}" method="post">
+    <p>Name: <input type="text" th:field="*{name}" /></p>
+    <p>Sex: <input type="text" th:field="*{sex}" /></p>
+    <p><input type="submit" value="Submit" />
+</form>
+
+
+
+</body>
+</html>

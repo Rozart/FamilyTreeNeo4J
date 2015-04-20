@@ -17,6 +17,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableNeo4jRepositories(basePackages = "pl.rozart.familytree.dao")
 public class FamilyTreeDbConfiguration extends Neo4jConfiguration {
 
+    public FamilyTreeDbConfiguration() {
+        setBasePackage("pl.rozart.familytree.models");
+    }
 
     @Bean
     GraphDatabaseService graphDatabaseService() {
