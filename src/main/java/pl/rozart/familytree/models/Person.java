@@ -6,6 +6,7 @@ import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.neo4j.annotation.RelatedTo;
 import org.springframework.data.neo4j.support.index.IndexType;
 import org.springframework.format.annotation.DateTimeFormat;
+import pl.rozart.familytree.forms.PersonForm;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,10 +24,10 @@ public class Person {
     @Indexed(unique = false, indexType = IndexType.FULLTEXT, indexName = "name")
     private String name;
 
-    @DateTimeFormat(pattern = "dd-MM-YYYY")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
 
-    @DateTimeFormat(pattern = "dd-MM-YYYY")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date deathDate;
 
     private String sex;
@@ -39,6 +40,19 @@ public class Person {
 
     @RelatedTo(type = "IS_CHILD_OF")
     private Relationship childOf;
+
+    public Person(){
+
+    }
+
+    public Person(PersonForm personForm) {
+        if (personForm != null) {
+            this.name = personForm.getName();
+            this.sex = personForm.getSex();
+            this.birthDate = personForm.getBirthDate();
+            this.deathDate = personForm.getDeathDate();
+        }
+    }
 
     public Long getId() {
         return id;

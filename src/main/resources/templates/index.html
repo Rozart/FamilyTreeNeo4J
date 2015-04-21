@@ -9,18 +9,26 @@
 <h1>Current people</h1>
 
 <table>
+    <tr>
+        <th>Name</th>
+        <th>Sex</th>
+        <th>Birth date</th>
+        <th>Death date</th>
+    </tr>
     <tr th:each="person : ${persons}">
         <td th:text="${person.name}">Default name</td>
         <td th:text="${person.sex}">N/A</td>
-        <td th:text="${person.birthDate}">00-00-0000</td>
-        <td th:text="${person.deathDate}">00-00-0000</td>
+        <td th:text="${person.birthDate} ? ${#dates.format(person.birthDate,'yyyy-MM-dd')}">00-00-0000</td>
+        <td th:text="${person.deathDate} ? ${#dates.format(person.deathDate,'yyyy-MM-dd')}">00-00-0000</td>
     </tr>
 </table>
 
-<form action="#" th:action="@{/addPerson}" th:object="${person}" method="post">
-    <p>Name: <input type="text" th:field="*{name}" /></p>
-    <p>Sex: <input type="text" th:field="*{sex}" /></p>
-    <p><input type="submit" value="Submit" />
+<form action="#" th:action="@{/addPerson}" th:object="${personForm}" method="post">
+    <p>Name: <input type="text" name="name" th:field="*{name}" /></p>
+    <p>Sex: <input type="text" name="sex" th:field="*{sex}" /></p>
+    <p>Birth date: <input type="date" name="birthDate" th:field="*{birthDate}"/></p>
+    <p>Death date: <input type="date" name="deathDate" th:field="*{deathDate}"/></p>
+    <p><input type="submit" value="Submit" /></p>
 </form>
 
 
