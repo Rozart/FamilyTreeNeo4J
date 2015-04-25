@@ -19,6 +19,8 @@ public class PersonForm {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date deathDate;
 
+    private Long parentsRelationshipId;
+
     public Date getBirthDate() {
         return birthDate;
     }
@@ -49,5 +51,13 @@ public class PersonForm {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getParentsRelationshipId() {
+        return parentsRelationshipId;
+    }
+
+    public void setParentsRelationshipId(Long parentsRelationshipId) {
+        this.parentsRelationshipId = parentsRelationshipId;
     }
 }

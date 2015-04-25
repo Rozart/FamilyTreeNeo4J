@@ -16,6 +16,7 @@
         <th>Death date</th>
     </tr>
     <tr th:each="person : ${persons}">
+        <td th:text="${person.id}">Default id</td>
         <td th:text="${person.name}">Default name</td>
         <td th:text="${person.sex}">N/A</td>
         <td th:text="${person.birthDate} ? ${#dates.format(person.birthDate,'yyyy-MM-dd')}">00-00-0000</td>
@@ -23,14 +24,57 @@
     </tr>
 </table>
 
+<h1>Add person</h1>
+
 <form action="#" th:action="@{/addPerson}" th:object="${personForm}" method="post">
     <p>Name: <input type="text" name="name" th:field="*{name}" /></p>
     <p>Sex: <input type="text" name="sex" th:field="*{sex}" /></p>
     <p>Birth date: <input type="date" name="birthDate" th:field="*{birthDate}"/></p>
     <p>Death date: <input type="date" name="deathDate" th:field="*{deathDate}"/></p>
+
+    <select id="parentsSelect" th:field="*{parentsRelationshipId}">
+        <option th:each="relationship : ${relationships}"
+                th:value="${relationship.id}">
+                    <p th:each="partner : ${relationship.partners}"  th:text="${partner.name + ' [' + partner.sex + ']'}">
+                        Default name
+                    </p></option>
+    </select>
+
     <p><input type="submit" value="Submit" /></p>
 </form>
 
+<h1>Relationships</h1>
+
+<table>
+    <tr>
+        <th>Partners</th>
+    </tr>
+    <tr th:each="relationship : ${relationships}" >
+
+        <td style="border-width: 2px;">
+        <p th:each="partner : ${relationship.partners}"  th:text="${partner.name + ' [' + partner.sex + ']'}">
+            Default name
+        </p>
+        </td>
+    </tr>
+</table>
+
+<form action="#" th:action="@{/addRelationship}" th:object="${relationshipForm}" method="post">
+
+    <select id="personSelect" th:field="*{personId}">
+        <option th:each="person : ${persons}"
+                th:value="${person.id}"
+                th:text="${person.id + ' - ' + person.name + ' [' + person.sex + ']'}">Default name</option>
+    </select>
+
+    <select id="partnerSelect" th:field="*{partnerId}">
+        <option th:each="person : ${persons}"
+                th:value="${person.id}"
+                th:text="${person.id + ' - ' + person.name + ' [' + person.sex + ']'}">Default name</option>
+    </select>
+
+    <input type="submit" value="Submit"/>
+</form>
 
 
 </body>

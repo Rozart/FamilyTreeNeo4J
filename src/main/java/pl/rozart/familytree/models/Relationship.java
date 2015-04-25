@@ -1,5 +1,6 @@
 package pl.rozart.familytree.models;
 
+import org.springframework.data.neo4j.annotation.Fetch;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.neo4j.annotation.RelatedTo;
@@ -16,6 +17,7 @@ public class Relationship {
     @GraphId
     private Long id;
 
+    @Fetch
     @RelatedTo(type = "IS_IN_RELATIONSHIP")
     private Set<Person> partners = new HashSet<>();
 
