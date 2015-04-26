@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
     <meta charset="UTF-8" />
-    <title>HELLO</title>
+    <title>Family Tree</title>
 </head>
 <body>
 
@@ -31,14 +31,14 @@
     <p>Sex: <input type="text" name="sex" th:field="*{sex}" /></p>
     <p>Birth date: <input type="date" name="birthDate" th:field="*{birthDate}"/></p>
     <p>Death date: <input type="date" name="deathDate" th:field="*{deathDate}"/></p>
-
-    <select id="parentsSelect" th:field="*{parentsRelationshipId}">
+    <p>Parents:<select id="parentsSelect" th:field="*{parentsRelationshipId}">
+        <option value="">---NONE---</option>
         <option th:each="relationship : ${relationships}"
                 th:value="${relationship.id}">
                     <p th:each="partner : ${relationship.partners}"  th:text="${partner.name + ' [' + partner.sex + ']'}">
                         Default name
                     </p></option>
-    </select>
+    </select></p>
 
     <p><input type="submit" value="Submit" /></p>
 </form>
@@ -61,13 +61,15 @@
 
 <form action="#" th:action="@{/addRelationship}" th:object="${relationshipForm}" method="post">
 
-    <select id="personSelect" th:field="*{personId}">
+    <select id="personSelect" th:field="*{personId}" required="required">
+        <option value="">---SELECT---</option>
         <option th:each="person : ${persons}"
                 th:value="${person.id}"
                 th:text="${person.id + ' - ' + person.name + ' [' + person.sex + ']'}">Default name</option>
     </select>
 
-    <select id="partnerSelect" th:field="*{partnerId}">
+    <select id="partnerSelect" th:field="*{partnerId}" required="required">
+        <option value="">---SELECT---</option>
         <option th:each="person : ${persons}"
                 th:value="${person.id}"
                 th:text="${person.id + ' - ' + person.name + ' [' + person.sex + ']'}">Default name</option>
